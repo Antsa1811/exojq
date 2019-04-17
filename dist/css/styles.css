@@ -1,15 +1,1 @@
-.navbar {
-  background-color: #00796b;
-  width: 100%;
-}
-.navbar #logo {
-  width: 125px;
-  height: 50px;
-}
-.navbar .menu {
-  float: left;
-}
-.navbar .menu a {
-  text-decoration: none;
-  color: #ffff;
-}
+.marginTop{margin-top:25%}.navbar{background-color:#00796b;width:100%}.navbar #logo{width:125px;height:50px}.navbar .menu{float:left}.navbar .menu a{text-decoration:none;color:#ffff}.navbar .menu a:hover{color:#fffafa9f}.card-cust .card-footer{float:right;width:100%;display:flex;justify-content:flex-end}.card-cust .card-footer #text-card-footer{margin-right:10px}.blue-light{color:#0d47a1}.red-light{color:#ac0800}#pictJeu{width:500px;height:500px}#pictJeu .right{position:absolute;top:50%;left:150%}
