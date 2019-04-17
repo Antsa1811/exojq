@@ -1,0 +1,15 @@
+.navbar {
+  background-color: #00796b;
+  width: 100%;
+}
+.navbar #logo {
+  width: 125px;
+  height: 50px;
+}
+.navbar .menu {
+  float: left;
+}
+.navbar .menu a {
+  text-decoration: none;
+  color: #ffff;
+}
