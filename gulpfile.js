@@ -7,23 +7,30 @@ const minjs=require('gulp-uglify');
 const connect=require('gulp-connect');
 const mincss=require('gulp-cssmin');
 
+//Path
+const PathStyle='src/css/*.less';
+const PathUglify = 'src/js/app.js';
+const PathHtml ='src/*.html';
+const PathImage ='src/img/*';
 
-
-gulp.task('less',function (){
-    return gulp.src('src/css/*.less')
+function lessCss (done){
+    return gulp.src(PathStyle)
     .pipe(less())
     .pipe(mincss())
     .pipe(gulp.dest('dist/css'));
-})
+
+    done();
+};
 
 
-gulp.task('uglify',function (){
+function uglify (done){
 
-   return gulp.src('src/js/app.js')
+   return gulp.src(PathUglify)
     .pipe(minjs())
     .pipe(gulp.dest('dist/js'));
 
-});
+    done();
+};
 
 
 
@@ -47,11 +54,11 @@ gulp.task('connect',function(){
 
 });
 
-gulp.task('html',function(){
-    gulp.src('vue/*.html')
-    .pipe(gulp.dest('vue'))
-    .pipe(connect.reload());
-});
+function html(done){
+    gulp.src(PathHtml)
+    .pipe(gulp.dest('dist/vue'))
+    done();
+};
 
 gulp.task('runserver',function(){
 
@@ -64,23 +71,27 @@ gulp.task('runserver',function(){
 });
 
 
-gulp.task('imagemin',function(){
-gulp.src('src/img/*')
+function imagemine (done){
+gulp.src(PathImage)
 .pipe(imagemin())
 .pipe(gulp.dest('dist/img'));
 
-});
+done();
+};
 
-gulp.task('src',gulp.parallel(['less'],['uglify'],['imagemin']));
+gulp.task('image', gulp.parallel(imagemine));
+
+gulp.task('src',gulp.parallel(less,uglify,html,imagemine));
 
 
-gulp.task('watch',function(){
+function watch (done){
 
-    gulp.watch('src/css/*.less',gulp.parallel(['less']));
-    gulp.watch('src/js/*.js', gulp.parallel(['uglify']));
-    gulp.watch('src/img/*.jpg', gulp.parallel(['imagemin']));
-    gulp.watch('vue/*.html', gulp.parallel(['html']));
+    gulp.watch(PathStyle,gulp.parallel(lessCss));
+    gulp.watch(PathUglify, gulp.parallel(uglify));
+    gulp.watch(PathImage, gulp.parallel(imagemine));
+    gulp.watch(PathHtml, gulp.parallel(html));
 
-});
+    done();
+};
 
-gulp.task('default',gulp.parallel(['watch']));
+gulp.task('default',gulp.parallel(watch));
